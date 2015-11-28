@@ -1,0 +1,38 @@
+<%= javascript_include_tag :defaults, "nested_form" %>
+<% if @event.errors.any? %>        
+      <div id="error_explanation" class="col-sm-6  btn-danger">
+        <h4>
+          La modification de l'évènement est impossible : 
+        </h4>
+        <ul>
+          <% @event.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <%end%>
+</br>
+<%= nested_form_for @event do |f| %>
+        <%= f.label :Nom%>
+        <%= f.text_field :Nom%> </br>
+        <%= f.label :Nombre_de_Participants%>
+        <%= f.text_field :Nombre_de_Participants%></br>
+        <%= f.label :Nombre_de_Creneaux_par_Participant%>
+        <%= f.text_field :Nombre_de_Creneaux_par_Participant%></br>
+
+        <%= f.fields_for :creneaus do |creneau_form| %>
+          <%= creneau_form.label :date_debut%>
+          <input type="text" class="datetimepicker">
+          <%= creneau_form.date_field :date_debut, :class => "form-control"%>
+          <%= creneau_form.label :date_fin%>
+          <%= creneau_form.date_field :date_fin %>
+          <%= creneau_form.label :Nombre_de_Participants_Necessaires%>
+           <%= creneau_form.text_field :Nombre_de_Participants_Necessaires %>
+          <%= creneau_form.link_to_remove "Enlever ce créneau" %>
+        <% end %>
+
+        <p><%= f.link_to_add "Ajouter un Créneau", :creneaus %></p>
+        <%=  button_tag(type: 'submit') do %>
+          Sauvegarder
+	        <%end%>
+<%end%>
