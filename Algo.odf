@@ -1,0 +1,81 @@
+
+		Participant.each  do :
+			Si Disponibilité.(where id_Participant=Participant && active =1).count = 1
+			Participant.active = 0	
+
+Tant que créneau pas tous placés  (= Disponibilité = 1 != creneau.Nb_Participants)
+	Prendre le plus petit Disponibilité.(where id_creneau=creneau).count
+		Disponibilité.Active where id_creneau=creneau = 0
+
+------------------------------------------------------------------------------
+
+FONCTION :Creneau_Valide :
+	POUR chacun des créneaux :
+		Si le nombre de disponibilité du créneau est inférieur à Nb_Participants :
+	FINPOUR
+		Renvoyer Liste_Créneaux_Non_Valides //Futur traitement
+FINFONCTION
+
+FONCTION :Placement participant :
+	POUR chacun des participants faire :
+		Si il n'a qu'un seul créneau de disponible ET le participant a moins de Nb_Cr_Pers, alors le lui attribuer, passer active à 0.
+	FIN POUR
+FINFONCTION
+
+FONCTION :Personne_Disponible (Creneau)
+	POUR chaque personne :
+		Si Disponibilité.(Id_Participant=Personne).count < Nb_Creneaux_Pers 
+		&& Disponibilité.(Id_Creneau=Creneau) contient la personne
+			Stocker la personne
+	FINPOUR
+Renvoyer la liste des personnes
+FINFONCTION
+
+FONCTION Meilleur_Choix (Liste_ID_personne)
+	Pour chaque personne
+		@Restant = ID_Personne.count-ID_Personne.active.count
+		Prendre le plus petit restant :
+			FINSI égalité entre 2 @restant
+				Prendre le plus petit ID_Personne.active.count 
+				Retourner ID_Personne
+			FINSI
+		Retourner ID_Personne
+	FINPOUR
+FINFONCTION
+
+MAIN :
+
+AppelF Creneau_Valide
+
+//AppelF Placement_Participant
+
+TANT_QUE les créneaux ne sont pas tous remplis :
+
+Trouver le créneau non rempli avec le minimum de personnes disponibles dessus.
+Disponibilité.(Meilleur_Choix(Personne_Disponible(Minimum))).active = 0
+	
+FINTANT_QUE
+
+
+#virer doublon = array.uniq
+FINMAIN
+
+
+
+
+
+
+
+Dans un deuxième temps
+Creneaux.each do |Tempo|
+@creneau_valide << Disponible.where(active == 0).(Tempo.ID).count != Creneau.where(Tempo.ID == DisponibleID_Creneau).Nb_participants
+
+POUR chaque ID_Creneau de Creneau
+
+@creneau_valide_Temp = @creneau_valide.where(Disponible.ID_Creneau = ID_Creneau && )
+@creneau_valide_Temp = @creneau_valide_temp.where(@creneau_valide_temp.count)
+
+	Tableau << Disponibilité where ((active == 0) && Disponible.ID_Creneau = ID_Creneau)
+
+FINPOUR
+Minimum = Tableau.count .min
