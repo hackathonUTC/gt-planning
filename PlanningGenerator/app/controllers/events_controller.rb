@@ -13,11 +13,13 @@ class EventsController < ApplicationController
 	def create
 		event_params[:creneaus_attributes].each do |cre|
 			@ncreneau = Creneau.new(cre.second.except(:_destroy))
-			@ncreneau.event_id = event_params[:id]
-			byebug
+			@ncreneau.event_id = Event.last.id + 1
+			#byebug
 			@ncreneau.save
 		end
+		nombre = event_params[:creneaus_attributes].count
 		@event = Event.new(event_params)
+		@event.Nombre_de_Creneaux = nombre
   		if @event.save
 		  			redirect_to @event
 		  	else

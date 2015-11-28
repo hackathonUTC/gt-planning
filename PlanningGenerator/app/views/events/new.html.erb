@@ -21,11 +21,15 @@
         <%= f.text_field :Nombre_de_Creneaux_par_Participant%></br>
 
         <%= f.fields_for :creneaus do |creneau_form| %>
+          <script type="text/javascript">
+
+              $('.datetimepicker').datetimepicker({format: '20YY-MM-DD HH:mm'});
+
+          </script>
           <%= creneau_form.label :date_debut%>
-          <input type="text" class="datetimepicker">
-          <%= creneau_form.date_field :date_debut, :class => "form-control"%>
+          <%= creneau_form.date_field :date_debut, :class => "form-control datetimepicker"%>
           <%= creneau_form.label :date_fin%>
-          <%= creneau_form.date_field :date_fin %>
+          <%= creneau_form.date_field :date_fin, :class => "form-control datetimepicker"%>
           <%= creneau_form.label :Nombre_de_Participants_Necessaires%>
            <%= creneau_form.text_field :Nombre_de_Participants_Necessaires %>
           <%= creneau_form.link_to_remove "Enlever ce créneau" %>
