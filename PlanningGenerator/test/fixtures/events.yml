@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  Nom: 
+  Nombre_de_Creneaux: 1
+  Nombre_de_Participants: 1
+  Nombre_de_Creneaux_par_Partcipant: 1
+
+two:
+  Nom: 
+  Nombre_de_Creneaux: 1
+  Nombre_de_Participants: 1
+  Nombre_de_Creneaux_par_Partcipant: 1
