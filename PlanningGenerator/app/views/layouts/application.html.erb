@@ -10,13 +10,13 @@
 
 <div class="row ">
 	<header class="page-header text-center">
-	<h1>Génération de planning</h1>
+	<h1>Génération de Planning</h1>
 	</header>
 <div class="col-sm-2 MaBordure">  
 	<ul>
-      <%= link_to controller: "events", action: "new" do %><i class="btn btn-primary">Nouvel Event</i> <% end%>
-	    <li><a href="#">Entrée</a></li>
-	    <li><a href="#">Contact</a></li>
+      <li><%= link_to controller: "events", action: "new" do %>1 : Entrer Event</i> <% end%></li>
+      <li><%= link_to controller: "participants", action: "new" do %>2 : Entrer les Participants</i> <% end%></li>
+      <li><%= link_to controller: "disponibilites", action: "new" do %>3 : Entrer leurs dispos</i> <% end%></li>
 	</ul>
 </div>
 

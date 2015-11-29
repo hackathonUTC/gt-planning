@@ -54,7 +54,7 @@ class DisponibilitesController < ApplicationController
 				@dispo.save
 			end
 		end
-		redirect_to 'disponibilites_path'
+		redirect_to disponibilites_path
 	end
 
 	def update

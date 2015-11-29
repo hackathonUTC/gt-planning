@@ -7,7 +7,7 @@ class ParticipantsController < ApplicationController
 		@event = Event.find(@participant.event_id)
 	end
 	def new
-		@j = 1
+		@participant = Participant.new
 		@event = Event.new
 	end
 	def create
@@ -18,7 +18,7 @@ class ParticipantsController < ApplicationController
 			@nparti.event_id = Event.last.id
 			@nparti.save
 		end
-		redirect_to @nparti
+		redirect_to new_disponibilite_path
 	end
 
 

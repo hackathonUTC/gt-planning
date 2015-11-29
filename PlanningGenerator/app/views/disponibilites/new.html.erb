@@ -1,4 +1,17 @@
 <h1> Choix des Disponibilites </h1>
+<% if @disponibilite.errors.any? %>        
+      <div id="error_explanation" class="col-sm-6  btn-danger">
+        <h4>
+          La création des disponibilites est impossible : 
+        </h4>
+        <ul>
+          <% @disponibilite.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <%end%>
+</br>
 <%= form_tag("create", method: "post") do%>
 	<table class ="table">
 		<tr>
@@ -18,5 +31,6 @@
 				
 	</table>
  	<%=  submit_tag("Sauvegarder")%>
+ 	<%= link_to 'Retour', participants_path%>
  	<%end%>
   	

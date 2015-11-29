@@ -15,7 +15,7 @@ class EventsController < ApplicationController
 		@event = Event.new(event_params)
 		@event.Nombre_de_Creneaux = nombre
   		if @event.save
-		  				redirect_to @event
+		  			redirect_to new_participant_path
 		  	else
 		  			render 'new'
 		  	end
