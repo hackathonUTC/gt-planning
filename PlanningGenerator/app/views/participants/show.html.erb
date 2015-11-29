@@ -1,0 +1,8 @@
+<p>
+  <strong>Nom :</strong>
+  <%=@participant.nom %>
+</p>
+<p>
+  <strong>Evenement :</strong>
+  <%=Event.find(@participant.event_id).Nom%>
+</p>

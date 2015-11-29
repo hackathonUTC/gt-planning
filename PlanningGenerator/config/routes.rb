@@ -2,6 +2,11 @@ Rails.application.routes.draw do
     get '/' => 'home#show'
     resources :events do
     end
+
+    resources :participants do
+    end
+    resources :disponibilites do
+    end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

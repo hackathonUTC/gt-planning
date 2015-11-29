@@ -1,5 +1,6 @@
 class Creneau < ActiveRecord::Base
 	belongs_to :event
+	has_many :disponibilites
 	has_many :participants, :through => :disponibilites
 	validates_associated :event
 	validates :date_fin, :presence => "true"

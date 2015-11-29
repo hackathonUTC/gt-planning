@@ -1,0 +1,21 @@
+<h1> Choix des Disponibilites <h1>
+<% form_tag('/create') %>
+<table class ="table">
+	<tr>
+			<td></td>
+			<% Participant.all.each do |p| %>
+			<td><%=p.nom%></td>
+			<% end %>
+	</tr>
+			<% Creneau.all.each do |c| %>
+	<tr>
+			<td><%="#{c.date_fin.strftime("%m/%d/%Y : %H:%M%p")}--#{c.date_debut.strftime("%m/%d/%Y : %H:%M%p")}"%></td>
+			<% Participant.all.each do |p| %>
+			<td><%=check_box_tag "#{p.id}c_ids[]", c.id, :class => "form-control"%></td>
+			<%end%>
+	</tr>
+	<%end%>
+	 <%=  button_tag(type: 'submit') do %>
+          Sauvegarder
+	        <%end%>
+</table>
