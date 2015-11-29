@@ -8,7 +8,23 @@
 </head>
 <body>
 
-<%= yield %>
+<div class="row ">
+	<header class="page-header text-center">
+	<h1>Génération de planning</h1>
+	</header>
+<div class="col-sm-2 MaBordure">  
+	<ul>
+      <%= link_to controller: "events", action: "new" do %><i class="btn btn-primary">Nouvel Event</i> <% end%>
+	    <li><a href="#">Entrée</a></li>
+	    <li><a href="#">Contact</a></li>
+	</ul>
+</div>
 
+
+<div class="container col-sm-9">
+	<div>
+		<%= yield %></div> 
+	</div>
+</div>
 </body>
 </html>
