@@ -11,14 +11,19 @@ class ParticipantsController < ApplicationController
 		@event = Event.new
 	end
 	def create
-		params2 = params.except(:utf8, :event, :authenticity_token, :button, :controller, :action)
-		event_params[:participants_attributes].each do |part|
-			params_boxes = event_params.except(:_destroy)
-			@nparti = Participant.new(part.second.except(:_destroy))
-			@nparti.event_id = Event.last.id
-			@nparti.save
-		end
+		@event = Event.new(event_params)
+		if ((event_params[:participants_attributes].count) != (Event.last.Nombre_de_Participants))
+			@event.errors.add(:participant, "Pas le bon nombre de participans !")
+			render 'new'
+		else
+			event_params[:participants_attributes].each do |part|
+				params_boxes = event_params.except(:_destroy)
+				@nparti = Participant.new(part.second.except(:_destroy))
+				@nparti.event_id = Event.last.id
+				@nparti.save
+			end
 		redirect_to new_disponibilite_path
+		end
 	end
 
 

@@ -33,7 +33,7 @@ class DisponibilitesController < ApplicationController
 			return 0
 		end
 
-		@caca= Placement_un_participant(1)
+		#@caca= Placement_un_participant(1)
 	end
 
 	def show
@@ -42,6 +42,8 @@ class DisponibilitesController < ApplicationController
 
 	def new
 		@disponibilite = Disponibilite.new
+		@participants = Participant.all
+		@creneaux = Creneau.all
 	end
 	def create
 		nparams = params.except(:utf8, :authenticity_token, :commit, :controller, :action)

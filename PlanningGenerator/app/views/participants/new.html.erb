@@ -1,30 +1,41 @@
 <h1> Sélection des participants </h1>
+<div class ="row">
 <%= javascript_include_tag :defaults, "nested_form" %>
-<% if @participant.errors.any? %>        
+<% if @event.errors.any? %>        
       <div id="error_explanation" class="col-sm-6  btn-danger">
         <h4>
           La modification de l'évènement est impossible : 
         </h4>
         <ul>
-          <% @participant.errors.full_messages.each do |msg| %>
+          <% @event.errors.full_messages.each do |msg| %>
             <li><%= msg %></li>
           <% end %>
         </ul>
       </div>
     <%end%>
+</div>
 </br>
 <div class ="row">
-<%= nested_form_for @event, url: {action: "create"} do |f| %>
+    <div class="col-sm-4  ">
+      <%= nested_form_for @event, url: {action: "create"} do |f| %>
         <%= f.fields_for :participants do |participant_form| %>
-          <%= participant_form.label :nom %>
-          <%= participant_form.date_field :nom, :class => "form-control"%>
-          <%= participant_form.link_to_remove "Enlever ce Participant" %>
-        <% end %>
-        <p><%= f.link_to_add "Ajouter un Participant", :participants %></p>
-        <%=  button_tag(type: 'submit') do %>
-          Sauvegarder
-	        <%end%>
-<%end%>
-<%= link_to 'Retour', new_participant_path%>
+        </br>
+        <%= participant_form.label :nom %></br>
+        <%= participant_form.date_field :nom, :class => "form-control"%></br>
+        <%= participant_form.link_to_remove "Enlever ce Participant",:class => "center btn btn-danger"%></br></br>
+        <% end %></br>
+        <h4></br><%= f.link_to_add "Ajouter un Participant", :participants%></h4></br>
+    </div>
 </div>
+        <div class="row">
+            <div class="col-sm-1">
+          <%=  button_tag(type: 'submit', class: "btn btn-primary") do %>
+            Sauvegarder
+  	        <%end%>
+            </div>
+            <div class="col-sm-1">
+            <%end%>
+        <%= link_to 'Retour', new_participant_path, :class => "btn btn-default"%>
+        </div>
+      </div>
 

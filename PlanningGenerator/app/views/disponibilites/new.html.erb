@@ -1,4 +1,5 @@
 <h1> Choix des Disponibilites </h1>
+<div class ="row">
 <% if @disponibilite.errors.any? %>        
       <div id="error_explanation" class="col-sm-6  btn-danger">
         <h4>
@@ -11,26 +12,27 @@
         </ul>
       </div>
     <%end%>
+</div>
 </br>
 <%= form_tag("create", method: "post") do%>
 	<table class ="table">
 		<tr>
 				<td></td>
-				<% Participant.all.each do |p| %>
+				<% @participants.each do |p| %>
 				<td><%=p.nom%></td>
 				<% end %>
 		</tr>
-				<% Creneau.all.each do |c| %>
+				<% @creneaux.all.each do |c| %>
 		<tr>
 				<td><%="#{c.date_fin.strftime("%m/%d/%Y : %H:%M%p")}"%></br><%="#{c.date_debut.strftime("%m/%d/%Y : %H:%M%p")}"%></td>
-				<% Participant.all.each do |p| %>
+				<% @participants.each do |p| %>
 				<td><%=check_box_tag "#{p.id}[]", c.id, false, :class => "form-control"%></td>
 				<%end%>
 		</tr>
 				<%end%>
 				
 	</table>
- 	<%=  submit_tag("Sauvegarder")%>
- 	<%= link_to 'Retour', participants_path%>
+ 	<%=  submit_tag("Sauvegarder", class: "btn btn-primary")%>
+ 	<%= link_to 'Retour', participants_path, class: "btn btn-ordinary"%>
  	<%end%>
   	

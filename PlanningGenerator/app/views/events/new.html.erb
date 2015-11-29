@@ -1,4 +1,5 @@
-<h1> Création de l'Evenement </h1>
+<h1> Création de l'Évenement </h1>
+<div class ="row">
 <%= javascript_include_tag :defaults, "nested_form" %>
 <% if @event.errors.any? %>        
       <div id="error_explanation" class="col-sm-6  btn-danger">
@@ -12,6 +13,7 @@
         </ul>
       </div>
     <%end%>
+</div>
 </br>
 <div class="row">
     <%= nested_form_for @event, html: {class: "form-horizontal"} do |f| %>
@@ -28,7 +30,7 @@
             </div>
         </div>
         <div class="form-group">     
-            <%= f.label :Nombre_de_Creneaux_par_Participant, :class => "col-sm-2 control-label"%>
+            <%= f.label :Nombre_de_Creneaux_par_Participant, "Nombre de Créneaux par Participant", :class => "col-sm-2 control-label"%>
             <div class="col-sm-3">
             <%= f.text_field :Nombre_de_Creneaux_par_Participant, :class => "form-control"%></br>
             </div>
@@ -40,7 +42,7 @@
                   $('.datetimepicker').datetimepicker({format: '20YY-MM-DD HH:mm'});
 
               </script>
-              <div class="col-sm-3">
+              <div class="col-sm-2">
               <%= creneau_form.label :date_debut, :class => "control-label"%>
               <%= creneau_form.date_field :date_debut, :class => "form-control datetimepicker"%>
               <%= creneau_form.label :date_fin%>
@@ -51,13 +53,15 @@
               <%= creneau_form.link_to_remove "Enlever ce créneau",:class => "btn btn-danger" %>
               </div>
             <% end %>
-            <br>
+            </br></br>
             <div class="row">
-            <p><%= f.link_to_add "Ajouter un Créneau", :creneaus, :class => "text-center btn navbar navbar-fixed-bottom" %></p>
+              <div class="col-sm-13">
+            <%= f.link_to_add "Ajouter un Créneau", :creneaus, :class =>"h3"%>
+              </div>
             </div>
             <div class="text-center">
             <br>
-            <%=  button_tag(type: 'submit',:class => "btn btn-original")   do %>
+            <%=  button_tag(type: 'submit', class: "btn btn-primary")   do %>
               
               Sauvegarder
               <%end%>

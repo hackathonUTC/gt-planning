@@ -11,14 +11,31 @@ class EventsController < ApplicationController
 	end
 
 	def create
-		nombre = event_params[:creneaus_attributes].count
+		nlem = nil
 		@event = Event.new(event_params)
-		@event.Nombre_de_Creneaux = nombre
-  		if @event.save
-		  			redirect_to new_participant_path
-		  	else
-		  			render 'new'
-		  	end
+		if (event_params[:creneaus_attributes] == nil)
+			@event.errors.add(:event, ": Pas de Créneau(x) choisi(s)")
+			render 'new'
+		else
+			event_params[:creneaus_attributes].each do |par|
+				if (par.second[:date_debut] >= par.second[:date_fin])
+					nlem = false
+				end
+			end
+			if(nlem)
+				@event.errors.add(:creneaus_attributes,  " : La date de début doit être inférieure à celle de fin")
+				render 'new'
+			else
+				@event = Event.new(event_params)
+				nombre = event_params[:creneaus_attributes].count
+				@event.Nombre_de_Creneaux = nombre
+		  		if @event.save
+				  		redirect_to new_participant_path
+				else
+				  		render 'new'
+				end
+			end
+		end
 	end
 
 
