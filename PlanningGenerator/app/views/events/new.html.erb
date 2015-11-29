@@ -47,19 +47,19 @@
               <%= creneau_form.label :Nombre_de_Participants_Necessaires%>
               <%= creneau_form.text_field :Nombre_de_Participants_Necessaires, :class => "form-control" %>
               <br>
-              <%= creneau_form.link_to_remove "Enlever ce créneau",:class => "btn btn-primary" %>
+              <%= creneau_form.link_to_remove "Enlever ce créneau",:class => "btn btn-danger" %>
               </div>
             <% end %>
             <br>
             <div class="row">
-            <p><%= f.link_to_add "Ajouter un Créneau", :creneaus, :class => "btn btn-primary navbar-fixed-bottom min-height: 150px" %></p>
+            <p><%= f.link_to_add "Ajouter un Créneau", :creneaus, :class => "text-center btn navbar navbar-fixed-bottom" %></p>
             </div>
             <div class="text-center">
             <br>
-            <%=  button_tag(type: 'submit')   do %>
+            <%=  button_tag(type: 'submit',:class => "btn btn-original")   do %>
               
               Sauvegarder
-    	        <%end%>
+              <%end%>
             </div>
     <%end%>
 </div>

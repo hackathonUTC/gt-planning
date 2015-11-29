@@ -1,5 +1,6 @@
 <h1> Choix des Disponibilites </h1>
 <%= form_tag("create", method: "post") do%>
+	<%=check_box_tag "42", 1, :class => "form-control"%>
 	<table class ="table">
 		<tr>
 				<td></td>
@@ -11,7 +12,7 @@
 		<tr>
 				<td><%="#{c.date_fin.strftime("%m/%d/%Y : %H:%M%p")}"%></br><%="#{c.date_debut.strftime("%m/%d/%Y : %H:%M%p")}"%></td>
 				<% Participant.all.each do |p| %>
-				<td><%=check_box_tag "#{p.id}[]", c.id, :class => "form-control"%></td>
+				<td><%=check_box_tag "1", "#{p.id}[]", c.id, :class => "form-control", :checked => true %></td>
 				<%end%>
 		</tr>
 				<%end%>

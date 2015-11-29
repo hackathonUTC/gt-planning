@@ -17,11 +17,10 @@ class DisponibilitesController < ApplicationController
 				@dispo.participant_id = groupe.first
 				@dispo.creneau_id = s
 				@dispo.active = 1
-				#byebug
 				@dispo.save
 			end
 		end
-		redirect_to @dispo
+		redirect_to 'disponibilites_path'
 	end
 
 	def disponibilite_params

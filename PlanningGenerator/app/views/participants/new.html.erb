@@ -18,17 +18,6 @@
           <% @j=@j+1%>
           <%= participant_form.label :nom %>
           <%= participant_form.date_field :nom, :class => "form-control"%>
-          <ul>
-          <% @creneaus = Creneau.all %>
-          <% @creneaus.each do |c| %>
-              <li><%= c.date_debut.strftime("%m/%d/%Y : %H:%M%p") %>
-              --
-              <%= c.date_fin.strftime("%m/%d/%Y : %H:%M%p") %>
-              <%  creneaux = "creneau_id[#{c.id}][#{@j}]" %>
-               <%= check_box_tag "#{@j}c_ids[]", c.id, :class => "form-control"%>
-              </li>
-          <%end %> 
-          </ul>
           <%= participant_form.link_to_remove "Enlever ce Participant" %>
         <% end %>
         <p><%= f.link_to_add "Ajouter un Participant", :participants %></p>
