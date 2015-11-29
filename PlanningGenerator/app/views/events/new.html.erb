@@ -1,0 +1,65 @@
+<%= javascript_include_tag :defaults, "nested_form" %>
+<% if @event.errors.any? %>        
+      <div id="error_explanation" class="col-sm-6  btn-danger">
+        <h4>
+          La modification de l'évènement est impossible : 
+        </h4>
+        <ul>
+          <% @event.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <%end%>
+</br>
+<div class="row">
+    <%= nested_form_for @event, html: {class: "form-horizontal"} do |f| %>
+        <div class="form-group">
+            <%= f.label :Nom, :class => "col-sm-2 control-label"%>
+            <div class="col-sm-3">
+                <%= f.text_field :Nom , :class => "form-control "%> 
+            </div>
+        </div>
+        <div class="form-group">
+            <%= f.label :Nombre_de_Participants, :class => "col-sm-2 control-label"%>
+            <div class="col-sm-3">
+                <%= f.text_field :Nombre_de_Participants, :class => "form-control"%></br>
+            </div>
+        </div>
+        <div class="form-group">     
+            <%= f.label :Nombre_de_Creneaux_par_Participant, :class => "col-sm-2 control-label"%>
+            <div class="col-sm-3">
+            <%= f.text_field :Nombre_de_Creneaux_par_Participant, :class => "form-control"%></br>
+            </div>
+        </div>
+
+            <%= f.fields_for :creneaus do |creneau_form| %>
+              <script type="text/javascript">
+
+                  $('.datetimepicker').datetimepicker({format: '20YY-MM-DD HH:mm'});
+
+              </script>
+              <div class="col-sm-3">
+              <%= creneau_form.label :date_debut, :class => "control-label"%>
+              <%= creneau_form.date_field :date_debut, :class => "form-control datetimepicker"%>
+              <%= creneau_form.label :date_fin%>
+              <%= creneau_form.date_field :date_fin, :class => "form-control datetimepicker"%>
+              <%= creneau_form.label :Nombre_de_Participants_Necessaires%>
+              <%= creneau_form.text_field :Nombre_de_Participants_Necessaires, :class => "form-control" %>
+              <br>
+              <%= creneau_form.link_to_remove "Enlever ce créneau",:class => "btn btn-primary" %>
+              </div>
+            <% end %>
+            <br>
+            <div class="row">
+            <p><%= f.link_to_add "Ajouter un Créneau", :creneaus, :class => "btn btn-primary navbar-fixed-bottom min-height: 150px" %></p>
+            </div>
+            <div class="text-center">
+            <br>
+            <%=  button_tag(type: 'submit')   do %>
+              
+              Sauvegarder
+    	        <%end%>
+            </div>
+    <%end%>
+</div>

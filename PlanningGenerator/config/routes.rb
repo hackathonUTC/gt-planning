@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
     get '/' => 'home#show'
+    post 'disponibilites/create'
     resources :events do
     end
-
     resources :participants do
     end
     resources :disponibilites do
