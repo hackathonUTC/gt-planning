@@ -1,4 +1,6 @@
 <h1> Sélection des participants </h1>
+<h4> Rappel : Il y en a <%=@event.Nombre_de_Participants%></h4>
+
 <div class ="row">
 <%= javascript_include_tag :defaults, "nested_form" %>
 <% if @event.errors.any? %>        

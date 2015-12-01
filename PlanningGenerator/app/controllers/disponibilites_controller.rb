@@ -2,18 +2,51 @@ class DisponibilitesController < ApplicationController
 
 
 		def Event_Valide()
-
+			max_creneau = Event.last.Nombre_de_Participants * Event.last.Nombre_de_Creneaux_par_Participant
+			needCreneau = 0
+        	bool = true
         	Creneau.all.each do |c|
+        		needCreneau += c.Nombre_de_Participants_Necessaires
 	            if Disponibilite.where({creneau: c}).count < c.Nombre_de_Participants_Necessaires
-	                return nil
+	                bool = nil
 	            end
         	end
-    		return true
+        	if needCreneau > max_creneau
+        		bool = nil
+        	end
+    		return bool
     	end
 
-    	def Placement_un_participant(id)
+    	#Je walide la fonction ci dessus la 
 
-			participant = Participant.find(id)
+
+    	def creneau_rempli (creneau)
+  			dispo_utilise = Disponibilite.where({creneau: creneau, active: 0})
+			if dispo_utilise.count == creneau.Nombre_de_Participants_Necessaires
+				return true
+			else
+				return nil
+			end
+		end
+
+		def chaque_creneau_rempli
+			Creneau.all.each do |c|
+				if (not(creneau_rempli(c)))
+					return nil
+				end
+			end
+			return true
+		end
+
+
+
+		def Placer_dans_dispo (disponibilite)
+			disponibilite.active = 0
+			disponibilite.update(id: @disponibilite.id)
+			return 0
+		end
+    	def Placement_un_participant(participant)
+
 			creneaux_non_dispo = Array.new
 			creneaux_dispo = Array.new
 
@@ -25,18 +58,39 @@ class DisponibilitesController < ApplicationController
 				end
 			end
 			if ((creneaux_dispo.count == 1) && (creneaux_non_dispo.count < Event.last.Nombre_de_Creneaux_par_Participant))
-				@cren = creneaux_dispo.first
-				@cren.active = 0
-				@cren.update(id: @cren.id)
+				@dispo_choisie = creneaux_dispo.first
+				Placer_dans_dispo(@dispo_choisie)
 			end
 			return 0
 		end
 
 		def Placement_Tout_Participant
 			Participant.all.each do |p|
-				Placement_un_participant(p.id)
+				Placement_un_participant(p)
 			end
 			return 0
+		end
+
+		def find_min_1_creneau (creneau)
+			if (not(creneau_rempli(creneau)))
+				var = Disponibilite.where({active: 1, creneau: creneau})
+				return var
+			end
+			return nil
+		end
+
+
+		def find_min_creneau
+			nb_dispo = Array.new
+			
+			Creneau.all.each do |c|
+			temp = find_min_1_creneau(c)
+				if temp
+					nb_dispo << [temp.count,c.id]	
+				end
+			end
+			dispo_avec_count_mini = nb_dispo.min
+			return Creneau.find(dispo_avec_count_mini.second)
 		end
 
 		def Personnes_Disponibles (creneau)
@@ -54,42 +108,6 @@ class DisponibilitesController < ApplicationController
 			return tableau
 		end
 
-		def creneau_rempli (creneau)
-			if Disponibilite.where({creneau: creneau, active: 0}).count < creneau.Nombre_de_Participants_Necessaires
-				return nil
-			end
-			return true
-		end
-
-		def chaque_creneau_rempli
-			Creneau.all.each do |c|
-				if (not(creneau_rempli(c)))
-					return nil
-				end
-			return 1
-			end
-		end
-
-
-		def find_min_1_creneau (creneau)
-			if (not(creneau_rempli(creneau)))
-				var = Disponibilite.where({active: 1, creneau: creneau})
-				return var
-			end
-			return nil
-		end
-
-
-		def find_min_creneau
-			nb_dispo = Array.new
-			
-			Creneau.all.each do |c|
-				if find_min_1_creneau(c)
-					nb_dispo << [find_min_1_creneau(c).count,c.id]	
-				end
-			end
-			return Creneau.find((nb_dispo.min).second)
-		end
 		
 
 		def Meilleur_Choix (liste)
@@ -134,16 +152,17 @@ class DisponibilitesController < ApplicationController
 					b = Personnes_Disponibles(a)
 					xx = Meilleur_Choix (b)
 					#byebug
-					#if Disponibilite.where({participant: xx, creneau: find_min_creneau()}).count !=0
-					yyy = Disponibilite.where({participant: xx, creneau: find_min_creneau()})
+
+					yyy = Disponibilite.where({participant: xx, creneau: find_min_creneau(), active: 1})
+					yyy.active = 0
+					if yyy.count !=0
 					
 					#byebug
-					if Disponibilite.where({participant: xx, creneau: find_min_creneau()}).count !=0
 
-					yyy.active = 0
+					
 					yyy.update(id: yyy.id)
 					yyy.save
-					end
+				end
 
 				end
 
@@ -154,18 +173,27 @@ class DisponibilitesController < ApplicationController
 
 
 			def index
-				a = Event_Valide()
+=begin
+				
 				b = Placement_Tout_Participant()
-				@Creneau = Creneau.all.find(24)
+				@Creneau = Creneau.all.find(16)
 				personnesD = Personnes_Disponibles(@Creneau)
 				plur = find_min_creneau()
 				plural = Personnes_Disponibles(plur)
 				jur = Meilleur_Choix(plural)
 				#byebug
 				main()
+=end
+			@ta_mere = Event_Valide()
+			if @ta_mere
+				@ta_mere = 1
+			else
+				@ta_mere = 0
+			end
 			end		
 
-		@rendu = Disponibilite.all.where({active: 0}).order(:date_debut)
+		#@rendu = Disponibilite.all.where({active: 0}).order(:date_debut)
+
 
 
 	

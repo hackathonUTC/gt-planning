@@ -4,3 +4,13 @@
     border-width:1px;
     border-color:grey;
 }
+
+.navbar
+{
+  height: 8vh;
+}
+
+.btn
+{
+	font-size: 30px;
+}

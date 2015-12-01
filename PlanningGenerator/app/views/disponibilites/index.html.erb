@@ -1,14 +1,3 @@
-<h1>Planning Resultat </h1>
-<% compte = @rendu.count %>
-<div class="row">
-<table class = "table table-striped table-bordered">
-   <tr>
-       <% @rendu.each do |r|
-        if ((compte % 4) == 0)%>
-          </tr><tr><%
-        end%>
-         <td><% r.participant.name %></td>
-         <%compte = compte - 1%>
-   <%end%>
-</table>
-</div>
+IL y a
+
+<%=  @ta_mere %>
