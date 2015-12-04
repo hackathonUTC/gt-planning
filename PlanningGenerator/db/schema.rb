@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151128154732) do
+ActiveRecord::Schema.define(version: 20151201201637) do
 
   create_table "creneaus", force: :cascade do |t|
     t.integer  "Nombre_de_Participants_Necessaires"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20151128154732) do
     t.datetime "updated_at",                         null: false
     t.datetime "date_debut"
     t.datetime "date_fin"
+    t.string   "nom_creneau"
   end
 
   add_index "creneaus", ["event_id"], name: "index_creneaus_on_event_id"

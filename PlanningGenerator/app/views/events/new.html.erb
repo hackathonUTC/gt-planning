@@ -30,7 +30,7 @@
             </div>
         </div>
         <div class="form-group">     
-            <%= f.label :Nombre_de_Creneaux_par_Participant, "Nombre de Créneaux par Participant", :class => "col-sm-2 control-label"%>
+            <%= f.label :Nombre_de_Creneaux_par_Participant, "Nombre de Créneaux Max par Participant", :class => "col-sm-2 control-label"%>
             <div class="col-sm-3">
             <%= f.text_field :Nombre_de_Creneaux_par_Participant, :class => "form-control"%></br>
             </div>
@@ -43,6 +43,8 @@
 
               </script>
               <div class="col-sm-2">
+              <%= creneau_form.label :nom_creneau%>
+              <%= creneau_form.text_field :nom_creneau, :class => "form-control" %>
               <%= creneau_form.label :date_debut, :class => "control-label"%>
               <%= creneau_form.date_field :date_debut, :class => "form-control datetimepicker"%>
               <%= creneau_form.label :date_fin%>

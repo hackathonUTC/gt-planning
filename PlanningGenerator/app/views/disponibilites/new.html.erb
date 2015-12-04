@@ -24,7 +24,7 @@
 		</tr>
 				<% @creneaux.all.each do |c| %>
 		<tr>
-				<td><%="#{c.date_fin.strftime("%m/%d/%Y : %H:%M%p")}"%></br><%="#{c.date_debut.strftime("%m/%d/%Y : %H:%M%p")}"%></td>
+				<td><div> <%="#{c.date_fin.strftime("%m/%d/%Y : %H:%M")}"%> </br><%="#{c.date_debut.strftime("%m/%d/%Y : %H:%M")}"%></div><div> <%=c.nom_creneau %></div></td>
 				<% @participants.each do |p| %>
 				<td><%=check_box_tag "#{p.id}[]", c.id, false, :class => "form-control"%></td>
 				<%end%>

@@ -44,6 +44,6 @@ class EventsController < ApplicationController
 
 	 private 
   		def event_params
-  			params.require(:event).permit(:Nom, :Nombre_de_Participants, :Nombre_de_Creneaux, :Nombre_de_Creneaux_par_Participant, :event_id, creneaus_attributes: [:id, :date_fin, :date_debut, :Nombre_de_Participants_Necessaires, :_destroy])
+  			params.require(:event).permit(:Nom, :Nombre_de_Participants, :Nombre_de_Creneaux, :Nombre_de_Creneaux_par_Participant, :event_id, creneaus_attributes: [:id, :date_fin, :date_debut, :Nombre_de_Participants_Necessaires, :nom_creneau, :_destroy])
 		end
 end

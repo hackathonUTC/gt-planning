@@ -16,21 +16,19 @@
       </div>
     <%end%>
 </div>
-</br>
 <div class ="row">
     <div class="col-sm-4  ">
       <%= nested_form_for @event, url: {action: "create"} do |f| %>
         <%= f.fields_for :participants do |participant_form| %>
-        </br>
-        <%= participant_form.label :nom %></br>
+        <%= participant_form.label :nom %>
         <%= participant_form.date_field :nom, :class => "form-control"%></br>
         <%= participant_form.link_to_remove "Enlever ce Participant",:class => "center btn btn-danger"%></br></br>
         <% end %></br>
-        <h4></br><%= f.link_to_add "Ajouter un Participant", :participants%></h4></br>
+        <h4><%= f.link_to_add "Ajouter un Participant", :participants%></h4>
     </div>
 </div>
         <div class="row">
-            <div class="col-sm-1">
+            <div class="col-sm-2">
           <%=  button_tag(type: 'submit', class: "btn btn-primary") do %>
             Sauvegarder
   	        <%end%>
