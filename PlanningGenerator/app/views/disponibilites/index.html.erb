@@ -1,4 +1,4 @@
-<%=  @caca %>
+<%=  @caca %></br></br>
 <% if (not(@caca)) %>
 	<table class ="table">
 		<% Creneau.all.each do |c| %>
@@ -11,5 +11,6 @@
 			</tr>
 			<% end %>
 	</table>
-	<%= link_to 'Modifier Les Disponibilites', new_disponibilite_path, class: "btn btn-ordinary"%>
+
 <% end %>
+<%= link_to 'Modifier Les Disponibilites', disponibilites_rm_dispos_path, class: "btn btn-warning"%>

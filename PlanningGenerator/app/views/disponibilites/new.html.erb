@@ -13,7 +13,7 @@
       </div>
     <%end%>
 </div>
-</br>
+<h4> L'event en cours est : <%=@event_en_cours.Nom%> </h4>
 <%= form_tag("create", method: "post") do%>
 	<table class ="table">
 		<tr>
@@ -24,7 +24,7 @@
 		</tr>
 				<% @creneaux.all.each do |c| %>
 		<tr>
-				<td><div> <%="#{c.date_fin.strftime("%m/%d/%Y : %H:%M")}"%> </br><%="#{c.date_debut.strftime("%m/%d/%Y : %H:%M")}"%></div><div> <%=c.nom_creneau %></div></td>
+				<td><div> <%=c.date_fin.strftime("%m/%d/%Y : %H:%M")%> </br><%=c.date_debut.strftime("%m/%d/%Y : %H:%M")%></div> <%=c.Nombre_de_Participants_Necessaires%> Participant(s) Nécessaire(s)</td>
 				<% @participants.each do |p| %>
 				<td><%=check_box_tag "#{p.id}[]", c.id, false, :class => "form-control"%></td>
 				<%end%>
@@ -32,7 +32,9 @@
 				<%end%>
 				
 	</table>
- 	<%=  submit_tag("Sauvegarder", class: "btn btn-primary")%>
- 	<%= link_to 'Retour', participants_path, class: "btn btn-ordinary"%>
+ 	<%=  submit_tag("Sauvegarder", class: "btn btn-success")%>
+ 	<%= link_to 'Modifier les Participants', participants_path, class: "btn btn-warning"%>
+ 	<%= link_to "Modifier L'Évènement", edit_event_path(@event_en_cours), :class => "btn btn-warning"%>
+    <%= link_to "Modifier Les Créneaux", creneaus_path, :class => "btn btn-warning"%>
  	<%end%>
   	

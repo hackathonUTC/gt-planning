@@ -1,5 +1,5 @@
 <h1> Sélection des participants </h1>
-<h4> Rappel : Il y en a <%=@event.Nombre_de_Participants%></h4>
+<h4> Rappel : Il y a <%=@event_en_cours.Nombre_de_Participants%> participant(s) à entrer pour le <%=@event_en_cours.Nom%>.</h4>
 
 <div class ="row">
 <%= javascript_include_tag :defaults, "nested_form" %>
@@ -17,25 +17,28 @@
     <%end%>
 </div>
 <div class ="row">
-    <div class="col-sm-4  ">
+    <div class="col-sm-6">
       <%= nested_form_for @event, url: {action: "create"} do |f| %>
-        <%= f.fields_for :participants do |participant_form| %>
-        <%= participant_form.label :nom %>
-        <%= participant_form.date_field :nom, :class => "form-control"%></br>
-        <%= participant_form.link_to_remove "Enlever ce Participant",:class => "center btn btn-danger"%></br></br>
-        <% end %></br>
-        <h4><%= f.link_to_add "Ajouter un Participant", :participants%></h4>
+        <div class="form-inline">
+          <%= f.fields_for :participants do |participant_form| %> 
+          <div class="form-group">
+            <%= participant_form.label :nom %>
+            <%= participant_form.date_field :nom, :class => "form-control"%></br>
+          </div>
+          <%= participant_form.link_to_remove "Enlever ce Participant",:class => "center btn btn-danger"%>
+        </div>
+      <% end %></br>
+      <h4><%= f.link_to_add "Ajouter un Participant", :participants%></h4>
     </div>
 </div>
-        <div class="row">
-            <div class="col-sm-2">
-          <%=  button_tag(type: 'submit', class: "btn btn-primary") do %>
-            Sauvegarder
-  	        <%end%>
-            </div>
-            <div class="col-sm-1">
-            <%end%>
-        <%= link_to 'Retour', new_participant_path, :class => "btn btn-default"%>
-        </div>
-      </div>
+<div class="row">
+    <div class="col-sm-9" style="padding: 30px">
+      <%=  button_tag(type: 'submit', class: "btn btn-primary") do %>
+          Sauvegarder
+      <%end%>
+    <%end%>
+    <%= link_to "Modifier L'Évènement", edit_event_path(@event_en_cours), :class => "btn btn-warning"%>
+    <%= link_to "Modifier Les Créneaux", creneaus_path, :class => "btn btn-warning"%>
+    </div>
+</div>
 

@@ -38,6 +38,21 @@ class EventsController < ApplicationController
 			end
 		end
 	end
+	def edit
+			@event = Event.find(params[:id])
+	end
+	def update
+		@event = Event.find(params[:id])
+			if @event.update(event_params)
+					@disponibilite = Disponibilite.new
+					@participants = Participant.all
+					@creneaux = Creneau.all
+					@event_en_cours = Event.last
+  		  			redirect_to new_disponibilite_path
+  		  	else
+  		  			render 'edit'
+  		  	end
+	end
 
 
 

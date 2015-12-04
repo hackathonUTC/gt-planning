@@ -1,0 +1,42 @@
+<div class="row">
+      <% if @event.errors.any? %>        
+          <div id="error_explanation" class="col-sm-6  btn-danger">
+            <h4>
+              La modification de l'Évènement est impossible : 
+            </h4>
+            <ul>
+              <% @event.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+       <%end%>
+</div>
+</br>
+<div class="row">
+  <%= form_for @event, html: {class: "form-horizontal"} do |f| %>
+        <div class="form-group">
+            <%= f.label :Nom, :class => "col-sm-2 control-label"%>
+            <div class="col-sm-3">
+                <%= f.text_field :Nom , :class => "form-control "%> 
+            </div>
+        </div>
+        <div class="form-group">
+            <%= f.label :Nombre_de_Participants, :class => "col-sm-2 control-label"%>
+            <div class="col-sm-3">
+                <%= f.text_field :Nombre_de_Participants, :class => "form-control"%>
+            </div>
+        </div>
+        <div class="form-group">     
+            <%= f.label :Nombre_de_Creneaux_par_Participant, "Nombre de Créneaux Max par Participant", :class => "col-sm-2 control-label"%>
+            <div class="col-sm-3">
+            <%= f.text_field :Nombre_de_Creneaux_par_Participant, :class => "form-control"%>
+            </div>
+        </div>
+   <div class="col-sm-offset-2 col-sm-4">
+      <%=  button_tag(type: 'submit', class: "btn btn-primary") do %>
+        <i class="icon-ok icon-white"></i> Sauvegarder
+        <%end%>
+  </div>
+  <%end%>
+</div>

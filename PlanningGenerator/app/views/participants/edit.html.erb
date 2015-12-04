@@ -1,0 +1,30 @@
+<div class="row">
+      <% if @participant.errors.any? %>        
+          <div id="error_explanation" class="col-sm-6  btn-danger">
+            <h4>
+              La modification du participant est impossible : 
+            </h4>
+            <ul>
+              <% @participant.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+       <%end%>
+</div>
+</br>
+<div class="row">
+<%= form_for @participant, html: {class: "form-horizontal"} do |f| %>
+	 <div class="form-group">
+	            <%= f.label :nom, "Nom", :class => "col-sm-2 control-label"%>
+	            <div class="col-sm-4">
+	            	<%= f.text_field :nom, :class => "form-control"%>
+	            </div>
+	 </div>
+	 <div class="col-sm-offset-2 col-sm-4">
+	    <%=  button_tag(type: 'submit', class: "btn btn-primary") do %>
+	    	<i class="icon-ok icon-white"></i> Sauvegarder
+	    	<%end%>
+	</div>
+<%end%>
+</div>

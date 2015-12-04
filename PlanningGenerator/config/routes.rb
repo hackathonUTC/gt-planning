@@ -2,12 +2,16 @@ Rails.application.routes.draw do
 
     get '/' => 'home#show'
     post 'disponibilites/create'
+
     get 'disponibilites/fin'
+    get 'disponibilites/rm_dispos'
     resources :events do
     end
     resources :participants do
     end
     resources :disponibilites do
+    end
+    resources :creneaus do
     end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -3,5 +3,5 @@ class Participant < ActiveRecord::Base
 	has_many :disponibilites
 	has_many :creneaus, :through => :disponibilites
 	validates_associated :event
-	validates :nom, presence: true
+	validates :nom, presence: true, uniqueness: true
 end
