@@ -3,7 +3,7 @@
 	<table class ="table">
 		<% Creneau.all.each do |c| %>
 			<tr>
-				<td><%= c.date_debut.strftime("%m/%d/%Y : %H:%M")%>    <%=c.nom_creneau %></br> <%= c.date_fin.strftime("%m/%d/%Y : %H:%M")%></td>
+				<td><%= c.date_debut.strftime("%m/%d/%Y : %H:%M")%></br> <%= c.date_fin.strftime("%m/%d/%Y : %H:%M")%></td>
 				<% disp = c.disponibilites.where(active: 0) %>
 				<% disp.each do |d| %>
 					<td><%=d.participant.nom%></td>

@@ -42,8 +42,6 @@
               </script>
               
               <div class="col-sm-2">
-                <%= creneau_form.label :nom_creneau, :class => "control-label"%>
-                <%= creneau_form.text_field :nom_creneau, :class => "form-control" %>
                 <%= creneau_form.label :date_debut, :class => "control-label"%>
                 <%= creneau_form.date_field :date_debut, :class => "form-control datetimepicker"%>
                 <%= creneau_form.label :date_fin, :class => "control-label"%>
@@ -56,7 +54,7 @@
             <% end %>
             </br></br>
             <div class="row">
-              <div class="col-sm-13" style="padding-left: 45px">
+              <div class="col-sm-13 decallage">
             <%= f.link_to_add "Ajouter un Créneau", :creneaus, :class =>"btn btn-primary h3"%>
               </div>
             </div>

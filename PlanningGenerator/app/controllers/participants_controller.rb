@@ -2,10 +2,6 @@ class ParticipantsController < ApplicationController
 	def index
 	end
 
-	def show
-		@participant = Participant.find(params[:id])
-		@event = Event.find(@participant.event_id)
-	end
 	def new
 		@participant = Participant.new
 		@event = Event.new

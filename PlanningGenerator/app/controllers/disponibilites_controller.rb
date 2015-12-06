@@ -194,15 +194,15 @@ class DisponibilitesController < ApplicationController
 	end
 	def create
 		nparams = params.except(:utf8, :authenticity_token, :commit, :controller, :action)
+		groupeDispos = Array.new
+		i = 0
 		nparams.each do |groupe|
 			groupe.second.each do |s|
-				@dispo = Disponibilite.new
-				@dispo.participant_id = groupe.first
-				@dispo.creneau_id = s
-				@dispo.active = 1
-				@dispo.save
+				groupeDispos[i] = Disponibilite.new(:participant_id => groupe.first, :creneau_id => s, :active => 1)
+				i += 1
 			end
 		end
+		Disponibilite.import groupeDispos
 		redirect_to disponibilites_path
 	end
 
@@ -222,11 +222,7 @@ class DisponibilitesController < ApplicationController
 
 
 	def fin
-		Participant.destroy_all
-		Event.destroy_all
-		Disponibilite.destroy_all
-		Creneau.destroy_all
-
+		DatabaseCleaner.clean
 		redirect_to new_event_path
 	end
 

@@ -1,7 +1,9 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+require 'database_cleaner'
 
+DatabaseCleaner.strategy = :truncation
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.

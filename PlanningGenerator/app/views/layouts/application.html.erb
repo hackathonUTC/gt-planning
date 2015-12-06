@@ -14,15 +14,14 @@
 	</header>
 <div class="col-sm-2 MaBordure">  <h4>
 	<ul>
-      <li><%= link_to controller: "events", action: "new" do %>1 : Entrer Événement</i> <% end%></li>
+      <li><%= link_to_if(Event.last.nil?, "Création de L'Évènement", { controller: "events", action: "new" }) %></li>
       </br>
-      <li><%= link_to controller: "participants", action: "new" do %>2 : Entrer les Participants</i> <% end%></li></br>
-      <li><%= link_to controller: "disponibilites", action: "new" do %>3 : Entrer leurs Dispos</i> <% end%></li></br>
-      <li><%= link_to controller: "disponibilites", action: "fin" do %>Nettoyer et Recommencer</i> <% end%></li>
+      <li><%= link_to_if((Participant.last.nil? and not(Event.last.nil?)), "Choix des Participants", { controller: "participants", action: "new" }) %></li>
       </br>
-      <li>Have</li></br>
-      <li>Some </li> </br>
-      <li>Fun </li>
+      <li><%= link_to_if((Disponibilite.last.nil? and not(Event.last.nil?) and not(Participant.last.nil?)), "Gestion des Disponibilités", { controller: "disponibilites", action: "new" }) %></li>
+      </br>
+      <li><%= link_to controller: "disponibilites", action: "fin" do %>Tout Recommencer<% end%></li>
+      </br>
 	</ul></h4>
 </div>
 

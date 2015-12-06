@@ -1,0 +1,46 @@
+<div class="row">
+      <% if @creneau.errors.any? %>        
+          <div id="error_explanation" class="col-sm-6  btn-danger">
+            <h4>
+              La modification du Creneau est impossible : 
+            </h4>
+            <ul>
+              <% @creneau.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+       <%end%>
+</div>
+</br>
+<div class="row">
+  <%= form_for @creneau, html: {class: "form-horizontal"} do |f| %>
+        <script type="text/javascript">
+                  $('.datetimepicker').datetimepicker({format: '20YY-MM-DD HH:mm'});
+        </script>
+        <div class="form-group">
+            <%= f.label :date_debut, :class => "col-sm-2 control-label"%>
+            <div class="col-sm-3">
+                <%= f.date_field :date_debut , :class => "form-control datetimepicker"%> 
+            </div>
+        </div>
+        <div class="form-group">
+            <%= f.label :date_fin, :class => "col-sm-2 control-label"%>
+            <div class="col-sm-3">
+                <%= f.date_field :date_fin , :class => "form-control datetimepicker"%> 
+            </div>
+        </div>
+        <div class="form-group">
+            <%= f.label :Nombre_de_Participants_Necessaires, "Nombre De Participants", :class => "col-sm-2 control-label"%>
+            <div class="col-sm-3">
+                <%= f.text_field :Nombre_de_Participants_Necessaires, :class => "form-control"%>
+            </div>
+        </div>
+   <div class="col-sm-offset-2 col-sm-4">
+      <%=  button_tag(type: 'submit', class: "btn btn-primary") do %>
+        <i class="icon-ok icon-white"></i> Sauvegarder
+        <%end%>
+      <%= link_to "Retour", creneaus_path, :class => "btn btn-default"%>
+  </div>
+  <%end%>
+</div>
